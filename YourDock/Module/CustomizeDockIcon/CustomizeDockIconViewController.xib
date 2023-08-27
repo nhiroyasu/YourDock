@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="CustomizeDockIconViewController" customModule="YourDock" customModuleProvider="target">
+            <connections>
+                <outlet property="dockIconPreviewView" destination="qTw-u4-mYd" id="WwM-z8-YDm"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="487" height="342"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="32" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lhZ-Xf-Qgu">
+                    <rect key="frame" x="24" y="43" width="439" height="256"/>
+                    <subviews>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="qTw-u4-mYd">
+                            <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="256" id="7OG-qZ-VOU"/>
+                                <constraint firstAttribute="width" secondItem="qTw-u4-mYd" secondAttribute="height" multiplier="1:1" id="MQR-lm-S0b"/>
+                                <constraint firstAttribute="width" constant="256" id="MdZ-7P-YLC"/>
+                            </constraints>
+                        </customView>
+                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="24" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vAY-bL-pVM">
+                            <rect key="frame" x="288" y="78" width="151" height="100"/>
+                            <subviews>
+                                <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b8r-ii-eP6">
+                                    <rect key="frame" x="0.0" y="52" width="151" height="48"/>
+                                    <subviews>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h66-cr-kIg">
+                                            <rect key="frame" x="-7" y="21" width="116" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Select Gif" bezelStyle="rounded" image="photo.on.rectangle.angled" catalog="system" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="o8D-ob-cjA">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="didTapSelectGifButton:" target="-2" id="j6s-55-IY0"/>
+                                            </connections>
+                                        </button>
+                                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bT3-JE-UX1">
+                                            <rect key="frame" x="0.0" y="0.0" width="151" height="20"/>
+                                            <subviews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i1h-3H-Tpc">
+                                                    <rect key="frame" x="-2" y="2" width="113" height="16"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Background Color" id="dCm-Wk-Wim">
+                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TiM-g2-GzD">
+                                                    <rect key="frame" x="110" y="-7" width="48" height="32"/>
+                                                    <buttonCell key="cell" type="push" title="Textured Rounded" bezelStyle="rounded" image="NSColorPanel" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="g9N-kF-mWV">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="didTapColorWell:" target="-2" id="HQQ-cj-uFK"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <visibilityPriorities>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                            </visibilityPriorities>
+                                            <customSpacing>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                            </customSpacing>
+                                        </stackView>
+                                    </subviews>
+                                    <visibilityPriorities>
+                                        <integer value="1000"/>
+                                        <integer value="1000"/>
+                                    </visibilityPriorities>
+                                    <customSpacing>
+                                        <real value="3.4028234663852886e+38"/>
+                                        <real value="3.4028234663852886e+38"/>
+                                    </customSpacing>
+                                </stackView>
+                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wqM-3u-sUj">
+                                    <rect key="frame" x="0.0" y="0.0" width="113" height="28"/>
+                                    <subviews>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EV7-gq-38N">
+                                            <rect key="frame" x="-6" y="-6" width="86" height="40"/>
+                                            <buttonCell key="cell" type="push" title="Dock!" bezelStyle="rounded" image="square.and.arrow.down.fill" catalog="system" imagePosition="leading" alignment="center" controlSize="large" borderStyle="border" inset="2" id="C8s-M6-ZRc">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <color key="bezelColor" name="AccentColor"/>
+                                            <connections>
+                                                <action selector="didTapDockButton:" target="-2" id="3Jt-wF-Y76"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bvS-3C-dWM">
+                                            <rect key="frame" x="76" y="-6" width="43" height="40"/>
+                                            <buttonCell key="cell" type="push" title="Delete" bezelStyle="rounded" image="trash.fill" catalog="system" imagePosition="only" alignment="center" controlSize="large" borderStyle="border" inset="2" id="SEU-FU-uYr">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <color key="bezelColor" name="ErrorColor"/>
+                                            <connections>
+                                                <action selector="didTapDeleteButton:" target="-2" id="unQ-wp-5lD"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <visibilityPriorities>
+                                        <integer value="1000"/>
+                                        <integer value="1000"/>
+                                    </visibilityPriorities>
+                                    <customSpacing>
+                                        <real value="3.4028234663852886e+38"/>
+                                        <real value="3.4028234663852886e+38"/>
+                                    </customSpacing>
+                                </stackView>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="lhZ-Xf-Qgu" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="0RP-H4-255"/>
+                <constraint firstItem="lhZ-Xf-Qgu" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="HA2-WF-KEo"/>
+            </constraints>
+            <point key="canvasLocation" x="-96.5" y="37"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="NSColorPanel" width="32" height="32"/>
+        <image name="photo.on.rectangle.angled" catalog="system" width="20" height="16"/>
+        <image name="square.and.arrow.down.fill" catalog="system" width="16" height="16"/>
+        <image name="trash.fill" catalog="system" width="15" height="16"/>
+        <namedColor name="AccentColor">
+            <color red="0.16078431372549018" green="0.59607843137254901" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="ErrorColor">
+            <color red="0.83921568627450982" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
