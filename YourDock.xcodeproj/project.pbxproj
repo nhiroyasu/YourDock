@@ -103,7 +103,7 @@
 		4F81F4492A9998A900700E7D /* YourDock */ = {
 			isa = PBXGroup;
 			children = (
-				4FC403522A9AFE1D0061F9F0 /* Entiry */,
+				4FC403522A9AFE1D0061F9F0 /* Entity */,
 				4FC403442A9ADDD20061F9F0 /* BundleAssets */,
 				4FC403472A9ADE0D0061F9F0 /* Repository */,
 				4FC403462A9ADDFD0061F9F0 /* Util */,
@@ -164,13 +164,13 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
-		4FC403522A9AFE1D0061F9F0 /* Entiry */ = {
+		4FC403522A9AFE1D0061F9F0 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
 				4FC403532A9AFE280061F9F0 /* NotDefinedBundleIdError.swift */,
 				4FC403552A9AFEF90061F9F0 /* GifFormatError.swift */,
 			);
-			path = Entiry;
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		4FD1265D2A9B080B00B931EF /* Setting */ = {
