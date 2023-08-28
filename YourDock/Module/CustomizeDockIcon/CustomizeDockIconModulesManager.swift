@@ -1,14 +1,30 @@
 import AppKit
+import Combine
 
-class CustomizeDockIconModulesManager {
-    private var preservedModuleContainers: [CustomizeDockIconModuleContainer]
+protocol CustomizeDockIconModulesModifier {
+    func addNewCustomizeDockIconModule()
+    func editCustomizeDockIconModule(at uuid: UUID)
+    func removeCustomizeDockIconModule(at uuid: UUID)
+}
+
+class CustomizeDockIconModulesManager: CustomizeDockIconModulesModifier {
+    private var preservedModuleContainers: [CustomizeDockIconModuleContainer] {
+        didSet {
+            moduleContainersSubject.send(preservedModuleContainers)
+        }
+    }
     private let gifDataRepository: GifDataRepository
     private var userDefaults: UserDefaults
+    private let moduleContainersSubject: CurrentValueSubject<[CustomizeDockIconModuleContainer], Never>
 
-    init(gifDataRepository: GifDataRepository) {
+    init(
+        gifDataRepository: GifDataRepository,
+        moduleContainersSubject: CurrentValueSubject<[CustomizeDockIconModuleContainer], Never>
+    ) {
         self.preservedModuleContainers = []
         self.gifDataRepository = gifDataRepository
         self.userDefaults = UserDefaults.standard
+        self.moduleContainersSubject = moduleContainersSubject
     }
 
     func startAndRestoreLatestDocks() {
@@ -34,11 +50,21 @@ class CustomizeDockIconModulesManager {
         addCustomizeDockIconModule(state: .initializeState)
     }
 
+    func editCustomizeDockIconModule(at uuid: UUID) {
+        preservedModuleContainers.first(where: { $0.uuid == uuid })?.showWindow()
+    }
+
+    func removeCustomizeDockIconModule(at uuid: UUID) {
+        // NOTE: The container containing the window associated with the specified UUID will also be removed from preservedModuleContainers when the window is closed.
+        preservedModuleContainers.first(where: { $0.uuid == uuid })?.closeWindow()
+    }
+
     // MARK: - only used internal
 
     private func addCustomizeDockIconModule(state: CustomizeDockIconState) {
         let container = CustomizeDockIconModuleContainer(
             initialState: state,
+            stateSubscriber: AnySubscriber(self),
             becomeUselessHandler: { [weak self] containerUuid in
                 self?.preservedModuleContainers.removeAll(where: { $0.uuid == containerUuid })
             }
@@ -81,4 +107,20 @@ class CustomizeDockIconModulesManager {
             return nil
         }
     }
+}
+
+extension CustomizeDockIconModulesManager: Subscriber {
+    typealias Input = CustomizeDockIconState
+    typealias Failure = Never
+
+    func receive(subscription: Subscription) {
+        subscription.request(.unlimited)
+    }
+
+    func receive(_ input: CustomizeDockIconState) -> Subscribers.Demand {
+        moduleContainersSubject.send(preservedModuleContainers)
+        return .none
+    }
+
+    func receive(completion: Subscribers.Completion<Never>) {}
 }

@@ -12,7 +12,7 @@ class DockIconContentView: NSView {
         image: NSImage?,
         backgroundColor: NSColor
     ) {
-        imageView = GifImageView(frame: .zero)
+        imageView = AntialiasedImageView(frame: .zero)
         super.init(frame: frameRect)
         wantsLayer = true
         translatesAutoresizingMaskIntoConstraints = true

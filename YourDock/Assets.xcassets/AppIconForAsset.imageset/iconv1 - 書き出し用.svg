@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="1" x2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#29989d"/>
+      <stop offset="0" stop-color="#0981a3"/>
+      <stop offset="1" stop-color="#1dd1e0"/>
+    </linearGradient>
+    <clipPath id="clip-アートボード_8">
+      <rect width="256" height="256"/>
+    </clipPath>
+  </defs>
+  <g id="アートボード_8" data-name="アートボード – 8" clip-path="url(#clip-アートボード_8)">
+    <path id="前面オブジェクトで型抜き_1" data-name="前面オブジェクトで型抜き 1" d="M52,0H204a52,52,0,0,1,52,52V204a52,52,0,0,1-52,52H52A52,52,0,0,1,0,204V52A52,52,0,0,1,52,0Z" fill="url(#linear-gradient)"/>
+    <path id="前面オブジェクトで型抜き_2" data-name="前面オブジェクトで型抜き 2" d="M62,124a61.71,61.71,0,0,1-34.665-10.589A62.182,62.182,0,0,1,4.872,86.133a61.918,61.918,0,0,1,5.716-58.8A62.181,62.181,0,0,1,37.867,4.872a61.918,61.918,0,0,1,58.8,5.716,62.18,62.18,0,0,1,22.463,27.278,61.919,61.919,0,0,1-5.716,58.8,62.18,62.18,0,0,1-27.278,22.463A61.61,61.61,0,0,1,62,124ZM27.2,50.93a9.01,9.01,0,0,0-9,9v5.277a9.01,9.01,0,0,0,9,9h22.59V96.8a9.01,9.01,0,0,0,9,9H64.07a9.01,9.01,0,0,0,9-9V74.207H95.66a9.01,9.01,0,0,0,9-9V59.93a9.01,9.01,0,0,0-9-9H73.07V28.339a9.01,9.01,0,0,0-9-9H58.793a9.01,9.01,0,0,0-9,9V50.93Z" transform="translate(67 17)" fill="#fff"/>
+    <rect id="長方形_6" data-name="長方形 6" width="216" height="64" rx="12" transform="translate(21 157)" fill="rgba(255,255,255,0.31)"/>
+    <rect id="長方形_7" data-name="長方形 7" width="40" height="39" rx="8" transform="translate(55 170)" fill="#fff"/>
+    <rect id="長方形_7-2" data-name="長方形 7" width="40" height="39" rx="8" transform="translate(108 170)" fill="#fff"/>
+    <rect id="長方形_7-3" data-name="長方形 7" width="40" height="39" rx="8" transform="translate(161 170)" fill="#fff"/>
+  </g>
+</svg>

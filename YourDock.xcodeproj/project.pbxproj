@@ -21,7 +21,6 @@
 		4FC4031E2A9A262F0061F9F0 /* CGImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4031D2A9A262F0061F9F0 /* CGImage+.swift */; };
 		4FC403202A9A26780061F9F0 /* NSImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4031F2A9A26780061F9F0 /* NSImage+.swift */; };
 		4FC403222A9A2BE90061F9F0 /* dock-animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4FC403212A9A2BE90061F9F0 /* dock-animation.gif */; };
-		4FC403242A9A2CBF0061F9F0 /* GitImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC403232A9A2CBF0061F9F0 /* GitImageView.swift */; };
 		4FC403262A9A465C0061F9F0 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC403252A9A465C0061F9F0 /* UserDefaults+.swift */; };
 		4FC403282A9A4A230061F9F0 /* GifDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC403272A9A4A230061F9F0 /* GifDataRepository.swift */; };
 		4FC403492A9AE0470061F9F0 /* CustomizeDockIconState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC403482A9AE0470061F9F0 /* CustomizeDockIconState.swift */; };
@@ -32,11 +31,20 @@
 		4FC403542A9AFE280061F9F0 /* NotDefinedBundleIdError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC403532A9AFE280061F9F0 /* NotDefinedBundleIdError.swift */; };
 		4FC403562A9AFEF90061F9F0 /* GifFormatError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC403552A9AFEF90061F9F0 /* GifFormatError.swift */; };
 		4FD1265B2A9B068200B931EF /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 4FD1265A2A9B068200B931EF /* LaunchAtLogin */; };
-		4FD126622A9B08F000B931EF /* SettingWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126612A9B08F000B931EF /* SettingWindowController.swift */; };
-		4FD126662A9B0B1100B931EF /* SettingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126652A9B0B1100B931EF /* SettingWindow.swift */; };
-		4FD126692A9B0D5B00B931EF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126672A9B0D5B00B931EF /* SettingViewController.swift */; };
-		4FD1266A2A9B0D5B00B931EF /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD126682A9B0D5B00B931EF /* SettingViewController.xib */; };
-		4FD1266D2A9C228500B931EF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD1266C2A9C228500B931EF /* HomeView.swift */; };
+		4FD1266D2A9C228500B931EF /* DockListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD1266C2A9C228500B931EF /* DockListView.swift */; };
+		4FD126702A9C304900B931EF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD1266F2A9C304900B931EF /* MainView.swift */; };
+		4FD126732A9C329200B931EF /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126722A9C329200B931EF /* SettingView.swift */; };
+		4FD126762A9C32A100B931EF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126752A9C32A100B931EF /* AboutView.swift */; };
+		4FD126782A9C332900B931EF /* ApplicationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126772A9C332900B931EF /* ApplicationName.swift */; };
+		4FD1267A2A9C33BA00B931EF /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126792A9C33BA00B931EF /* MainWindowController.swift */; };
+		4FD1267C2A9C33CB00B931EF /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD1267B2A9C33CB00B931EF /* MainWindow.swift */; };
+		4FD126832A9C3E4200B931EF /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126822A9C3E4200B931EF /* AppColor.swift */; };
+		4FD126852A9C3E8A00B931EF /* NSColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126842A9C3E8A00B931EF /* NSColor+.swift */; };
+		4FD126872A9C3F6D00B931EF /* AppText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126862A9C3F6D00B931EF /* AppText.swift */; };
+		4FD126892A9C528E00B931EF /* DockIconContentRepresentableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126882A9C528E00B931EF /* DockIconContentRepresentableView.swift */; };
+		4FD1268B2A9C890B00B931EF /* AntialiasedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD1268A2A9C890B00B931EF /* AntialiasedImageView.swift */; };
+		4FD1268D2A9C9A5400B931EF /* DockListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD1268C2A9C9A5400B931EF /* DockListController.swift */; };
+		4FD1268F2A9CA5E800B931EF /* SavedDockTileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD1268E2A9CA5E800B931EF /* SavedDockTileInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,7 +65,6 @@
 		4FC4031D2A9A262F0061F9F0 /* CGImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImage+.swift"; sourceTree = "<group>"; };
 		4FC4031F2A9A26780061F9F0 /* NSImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+.swift"; sourceTree = "<group>"; };
 		4FC403212A9A2BE90061F9F0 /* dock-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "dock-animation.gif"; sourceTree = "<group>"; };
-		4FC403232A9A2CBF0061F9F0 /* GitImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitImageView.swift; sourceTree = "<group>"; };
 		4FC403252A9A465C0061F9F0 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		4FC403272A9A4A230061F9F0 /* GifDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifDataRepository.swift; sourceTree = "<group>"; };
 		4FC403482A9AE0470061F9F0 /* CustomizeDockIconState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeDockIconState.swift; sourceTree = "<group>"; };
@@ -67,11 +74,20 @@
 		4FC403502A9AFBA50061F9F0 /* LogPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogPrint.swift; sourceTree = "<group>"; };
 		4FC403532A9AFE280061F9F0 /* NotDefinedBundleIdError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotDefinedBundleIdError.swift; sourceTree = "<group>"; };
 		4FC403552A9AFEF90061F9F0 /* GifFormatError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifFormatError.swift; sourceTree = "<group>"; };
-		4FD126612A9B08F000B931EF /* SettingWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWindowController.swift; sourceTree = "<group>"; };
-		4FD126652A9B0B1100B931EF /* SettingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWindow.swift; sourceTree = "<group>"; };
-		4FD126672A9B0D5B00B931EF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		4FD126682A9B0D5B00B931EF /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
-		4FD1266C2A9C228500B931EF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		4FD1266C2A9C228500B931EF /* DockListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockListView.swift; sourceTree = "<group>"; };
+		4FD1266F2A9C304900B931EF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		4FD126722A9C329200B931EF /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		4FD126752A9C32A100B931EF /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		4FD126772A9C332900B931EF /* ApplicationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationName.swift; sourceTree = "<group>"; };
+		4FD126792A9C33BA00B931EF /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		4FD1267B2A9C33CB00B931EF /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
+		4FD126822A9C3E4200B931EF /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
+		4FD126842A9C3E8A00B931EF /* NSColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+.swift"; sourceTree = "<group>"; };
+		4FD126862A9C3F6D00B931EF /* AppText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppText.swift; sourceTree = "<group>"; };
+		4FD126882A9C528E00B931EF /* DockIconContentRepresentableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockIconContentRepresentableView.swift; sourceTree = "<group>"; };
+		4FD1268A2A9C890B00B931EF /* AntialiasedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntialiasedImageView.swift; sourceTree = "<group>"; };
+		4FD1268C2A9C9A5400B931EF /* DockListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockListController.swift; sourceTree = "<group>"; };
+		4FD1268E2A9CA5E800B931EF /* SavedDockTileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedDockTileInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +121,7 @@
 		4F81F4492A9998A900700E7D /* YourDock */ = {
 			isa = PBXGroup;
 			children = (
+				4FD1267F2A9C3D7C00B931EF /* Asset */,
 				4FC403522A9AFE1D0061F9F0 /* Entity */,
 				4FC403442A9ADDD20061F9F0 /* BundleAssets */,
 				4FC403472A9ADE0D0061F9F0 /* Repository */,
@@ -137,6 +154,7 @@
 				4FC4034A2A9AE29C0061F9F0 /* CustomizeDockIconStore.swift */,
 				4FC4030A2A99E39E0061F9F0 /* CustomizeDockIconViewController.xib */,
 				4FC402DD2A99BC650061F9F0 /* DockIconContentView.swift */,
+				4FD126882A9C528E00B931EF /* DockIconContentRepresentableView.swift */,
 				4FC4034C2A9AE36B0061F9F0 /* CustomizeDockIconModuleContainer.swift */,
 				4FC4034E2A9AEE9F0061F9F0 /* CustomizeDockIconModulesManager.swift */,
 			);
@@ -151,9 +169,11 @@
 				4FC403252A9A465C0061F9F0 /* UserDefaults+.swift */,
 				4FC4030D2A99E8B70061F9F0 /* FileSelectionManager.swift */,
 				4FC403072A99DEF60061F9F0 /* GifLoopConverter.swift */,
-				4FC403232A9A2CBF0061F9F0 /* GitImageView.swift */,
 				4FC4030F2A99F3B00061F9F0 /* GridBackgroundView.swift */,
 				4FC403502A9AFBA50061F9F0 /* LogPrint.swift */,
+				4FD126772A9C332900B931EF /* ApplicationName.swift */,
+				4FD126842A9C3E8A00B931EF /* NSColor+.swift */,
+				4FD1268A2A9C890B00B931EF /* AntialiasedImageView.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -171,37 +191,65 @@
 			children = (
 				4FC403532A9AFE280061F9F0 /* NotDefinedBundleIdError.swift */,
 				4FC403552A9AFEF90061F9F0 /* GifFormatError.swift */,
+				4FD1268E2A9CA5E800B931EF /* SavedDockTileInfo.swift */,
 			);
 			path = Entity;
-			sourceTree = "<group>";
-		};
-		4FD1265D2A9B080B00B931EF /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				4FD126612A9B08F000B931EF /* SettingWindowController.swift */,
-				4FD126652A9B0B1100B931EF /* SettingWindow.swift */,
-				4FD126672A9B0D5B00B931EF /* SettingViewController.swift */,
-				4FD126682A9B0D5B00B931EF /* SettingViewController.xib */,
-			);
-			path = Setting;
 			sourceTree = "<group>";
 		};
 		4FD1265E2A9B081600B931EF /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				4FD1266B2A9C227400B931EF /* Home */,
-				4FD1265D2A9B080B00B931EF /* Setting */,
+				4FD1266E2A9C303B00B931EF /* MainWindow */,
 				4FC403452A9ADDE60061F9F0 /* CustomizeDockIcon */,
 			);
 			path = Module;
 			sourceTree = "<group>";
 		};
-		4FD1266B2A9C227400B931EF /* Home */ = {
+		4FD1266B2A9C227400B931EF /* DockList */ = {
 			isa = PBXGroup;
 			children = (
-				4FD1266C2A9C228500B931EF /* HomeView.swift */,
+				4FD1266C2A9C228500B931EF /* DockListView.swift */,
+				4FD1268C2A9C9A5400B931EF /* DockListController.swift */,
 			);
-			path = Home;
+			path = DockList;
+			sourceTree = "<group>";
+		};
+		4FD1266E2A9C303B00B931EF /* MainWindow */ = {
+			isa = PBXGroup;
+			children = (
+				4FD126742A9C329D00B931EF /* About */,
+				4FD126712A9C328C00B931EF /* Setting */,
+				4FD1266B2A9C227400B931EF /* DockList */,
+				4FD1266F2A9C304900B931EF /* MainView.swift */,
+				4FD126792A9C33BA00B931EF /* MainWindowController.swift */,
+				4FD1267B2A9C33CB00B931EF /* MainWindow.swift */,
+			);
+			path = MainWindow;
+			sourceTree = "<group>";
+		};
+		4FD126712A9C328C00B931EF /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				4FD126722A9C329200B931EF /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		4FD126742A9C329D00B931EF /* About */ = {
+			isa = PBXGroup;
+			children = (
+				4FD126752A9C32A100B931EF /* AboutView.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		4FD1267F2A9C3D7C00B931EF /* Asset */ = {
+			isa = PBXGroup;
+			children = (
+				4FD126822A9C3E4200B931EF /* AppColor.swift */,
+				4FD126862A9C3F6D00B931EF /* AppText.swift */,
+			);
+			path = Asset;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,7 +318,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FC403222A9A2BE90061F9F0 /* dock-animation.gif in Resources */,
-				4FD1266A2A9B0D5B00B931EF /* SettingViewController.xib in Resources */,
 				4FC402DA2A99B9040061F9F0 /* Main.storyboard in Resources */,
 				4FC4030C2A99E39E0061F9F0 /* CustomizeDockIconViewController.xib in Resources */,
 				4F81F44F2A9998AA00700E7D /* Assets.xcassets in Resources */,
@@ -314,24 +361,33 @@
 				4FC4030E2A99E8B70061F9F0 /* FileSelectionManager.swift in Sources */,
 				4FC4030B2A99E39E0061F9F0 /* CustomizeDockIconViewController.swift in Sources */,
 				4F81F45A2A999B1A00700E7D /* CustomizeDockIconWindowController.swift in Sources */,
+				4FD1268B2A9C890B00B931EF /* AntialiasedImageView.swift in Sources */,
 				4FC403262A9A465C0061F9F0 /* UserDefaults+.swift in Sources */,
-				4FC403242A9A2CBF0061F9F0 /* GitImageView.swift in Sources */,
 				4FC403542A9AFE280061F9F0 /* NotDefinedBundleIdError.swift in Sources */,
-				4FD126662A9B0B1100B931EF /* SettingWindow.swift in Sources */,
+				4FD126832A9C3E4200B931EF /* AppColor.swift in Sources */,
 				4F81F44B2A9998A900700E7D /* AppDelegate.swift in Sources */,
-				4FD126692A9B0D5B00B931EF /* SettingViewController.swift in Sources */,
 				4FC4034D2A9AE36B0061F9F0 /* CustomizeDockIconModuleContainer.swift in Sources */,
 				4FC403282A9A4A230061F9F0 /* GifDataRepository.swift in Sources */,
-				4FD126622A9B08F000B931EF /* SettingWindowController.swift in Sources */,
+				4FD126782A9C332900B931EF /* ApplicationName.swift in Sources */,
+				4FD1268D2A9C9A5400B931EF /* DockListController.swift in Sources */,
+				4FD126702A9C304900B931EF /* MainView.swift in Sources */,
+				4FD126872A9C3F6D00B931EF /* AppText.swift in Sources */,
+				4FD1268F2A9CA5E800B931EF /* SavedDockTileInfo.swift in Sources */,
 				4FC403102A99F3B00061F9F0 /* GridBackgroundView.swift in Sources */,
+				4FD126852A9C3E8A00B931EF /* NSColor+.swift in Sources */,
 				4FC4034B2A9AE29C0061F9F0 /* CustomizeDockIconStore.swift in Sources */,
 				4FC4034F2A9AEE9F0061F9F0 /* CustomizeDockIconModulesManager.swift in Sources */,
+				4FD1267A2A9C33BA00B931EF /* MainWindowController.swift in Sources */,
 				4FC402DC2A99B99A0061F9F0 /* CustomizeDockIconWindow.swift in Sources */,
+				4FD126762A9C32A100B931EF /* AboutView.swift in Sources */,
+				4FD1267C2A9C33CB00B931EF /* MainWindow.swift in Sources */,
 				4FC403082A99DEF60061F9F0 /* GifLoopConverter.swift in Sources */,
 				4FC4031E2A9A262F0061F9F0 /* CGImage+.swift in Sources */,
+				4FD126732A9C329200B931EF /* SettingView.swift in Sources */,
 				4FC402DE2A99BC650061F9F0 /* DockIconContentView.swift in Sources */,
-				4FD1266D2A9C228500B931EF /* HomeView.swift in Sources */,
+				4FD1266D2A9C228500B931EF /* DockListView.swift in Sources */,
 				4FC403512A9AFBA50061F9F0 /* LogPrint.swift in Sources */,
+				4FD126892A9C528E00B931EF /* DockIconContentRepresentableView.swift in Sources */,
 				4FC403492A9AE0470061F9F0 /* CustomizeDockIconState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
