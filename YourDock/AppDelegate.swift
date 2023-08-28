@@ -22,6 +22,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         customizeDockIconModulesManager.storeDocks()
     }
 
+    func applicationDidBecomeActive(_ notification: Notification) {
+        if !customizeDockIconModulesManager.existVisibleCustomizeDockIconWindow() {
+            mainWindowController?.showWindowAtCenter(nil)
+        }
+    }
+
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
         return true
     }

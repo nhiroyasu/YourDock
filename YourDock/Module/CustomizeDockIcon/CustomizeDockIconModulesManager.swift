@@ -59,6 +59,10 @@ class CustomizeDockIconModulesManager: CustomizeDockIconModulesModifier {
         preservedModuleContainers.first(where: { $0.uuid == uuid })?.closeWindow()
     }
 
+    func existVisibleCustomizeDockIconWindow() -> Bool {
+        !NSApplication.shared.windows.filter({ ($0 as? CustomizeDockIconWindow)?.isVisible ?? false }).isEmpty
+    }
+
     // MARK: - only used internal
 
     private func addCustomizeDockIconModule(state: CustomizeDockIconState) {
