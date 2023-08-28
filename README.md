@@ -6,7 +6,9 @@ This macOS application allows you to customize your preferred icons in the dock.
 Currently, you can only customize it to play a GIF image.
 
 ## Download
-We are currently in the process of requesting to publish this app on the App Store. Just a moment.
+<a href="https://apps.apple.com/jp/app/yourdock/id6463501478?mt=12" alt="app store">
+<img src="./images/mac_app_store_badge.svg" width=180 />
+</a>
 
 ## Preview
 ![ezgif-5-cb47180ea6](https://github.com/nhiroyasu/YourDock/assets/40600280/5a0396b0-7834-4697-bf16-c5fb59b58e20)
