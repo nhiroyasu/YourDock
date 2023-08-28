@@ -40,6 +40,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.imageScaling = .scaleProportionallyDown
         }
         let menu = NSMenu()
+        #if DEBUG
+        menu.addItem(NSMenuItem(title: "DEBUG", action: nil, keyEquivalent: ""))
+        menu.addItem(.separator())
+        #endif
         menu.addItem(NSMenuItem(title: "Add Dock", action: #selector(didTapAddDockMenuItem), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "Setting", action: #selector(didTapSettingMenuItem), keyEquivalent: ""))
         menu.addItem(.separator())
