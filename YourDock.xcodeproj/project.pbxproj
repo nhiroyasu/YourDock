@@ -36,6 +36,7 @@
 		4FD126662A9B0B1100B931EF /* SettingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126652A9B0B1100B931EF /* SettingWindow.swift */; };
 		4FD126692A9B0D5B00B931EF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126672A9B0D5B00B931EF /* SettingViewController.swift */; };
 		4FD1266A2A9B0D5B00B931EF /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD126682A9B0D5B00B931EF /* SettingViewController.xib */; };
+		4FD1266D2A9C228500B931EF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD1266C2A9C228500B931EF /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		4FD126652A9B0B1100B931EF /* SettingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWindow.swift; sourceTree = "<group>"; };
 		4FD126672A9B0D5B00B931EF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		4FD126682A9B0D5B00B931EF /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		4FD1266C2A9C228500B931EF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,10 +189,19 @@
 		4FD1265E2A9B081600B931EF /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				4FD1266B2A9C227400B931EF /* Home */,
 				4FD1265D2A9B080B00B931EF /* Setting */,
 				4FC403452A9ADDE60061F9F0 /* CustomizeDockIcon */,
 			);
 			path = Module;
+			sourceTree = "<group>";
+		};
+		4FD1266B2A9C227400B931EF /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4FD1266C2A9C228500B931EF /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +330,7 @@
 				4FC403082A99DEF60061F9F0 /* GifLoopConverter.swift in Sources */,
 				4FC4031E2A9A262F0061F9F0 /* CGImage+.swift in Sources */,
 				4FC402DE2A99BC650061F9F0 /* DockIconContentView.swift in Sources */,
+				4FD1266D2A9C228500B931EF /* HomeView.swift in Sources */,
 				4FC403512A9AFBA50061F9F0 /* LogPrint.swift in Sources */,
 				4FC403492A9AE0470061F9F0 /* CustomizeDockIconState.swift in Sources */,
 			);
@@ -463,7 +475,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nhiro1109.YourDock;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nhiro1109.debug.YourDock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
