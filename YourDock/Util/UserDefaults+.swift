@@ -28,7 +28,7 @@ extension UserDefaults {
                 let data = try jsonEncoder.encode(newValue)
                 self.setValue(String(data: data, encoding: .utf8), forKey: Keys.dockTileInfoArray.rawValue)
             } catch {
-                print(error.localizedDescription)
+                err(error.localizedDescription)
             }
         }
     }
