@@ -28,7 +28,12 @@ struct MainView: View {
             case .dockList:
                 let dockListPublisher = moduleContainersSubject.map { (containers: [CustomizeDockIconModuleContainer]) -> [DockTileItem] in
                     containers.map {
-                        .init(id: $0.uuid, gifData: $0.preservedState.gifData, backgroundColor: $0.preservedState.backgroundColor)
+                        .init(
+                            id: $0.uuid,
+                            name: $0.preservedState.name,
+                            gifData: $0.preservedState.gifData,
+                            backgroundColor: $0.preservedState.backgroundColor
+                        )
                     }
                 }
                 DockListView(

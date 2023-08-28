@@ -13,4 +13,8 @@ class MainWindow: NSWindow {
         title = "Your Dock!"
         contentViewController = viewController
     }
+
+    deinit {
+        info("deinit")
+    }
 }

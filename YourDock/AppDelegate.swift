@@ -13,7 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         setupCustomizeDockIconModulesManager()
-        setupMainWindowController()
+        showMainWindowControllerAndSetupIfNeeded()
         customizeDockIconModulesManager.startAndRestoreLatestDocks()
         setupObservingUserDefaults()
     }
@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidBecomeActive(_ notification: Notification) {
         if !customizeDockIconModulesManager.existVisibleCustomizeDockIconWindow() {
-            mainWindowController?.showWindowAtCenter(nil)
+            showMainWindowControllerAndSetupIfNeeded()
         }
     }
 
@@ -41,13 +41,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func didTapOpenToolWindowMenuItem() {
-        mainWindowController?.showWindowAtCenter(nil)
+        showMainWindowControllerAndSetupIfNeeded()
     }
 
+    #if DEBUG
     @objc func didTapResetUserDefaultsMenuItem() {
         let appDomain = Bundle.main.bundleIdentifier
         UserDefaults.standard.removePersistentDomain(forName: appDomain!)
     }
+    #endif
 
     private func setupMenubar() {
         if let button = statusItem.button {
@@ -75,19 +77,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func setupCustomizeDockIconModulesManager() {
         customizeDockIconModulesManager = .init(
             gifDataRepository: GifDataRepositoryImpl(),
+            dockTileInfoRepository: DockTileInfoRepositoryImpl(userDefaults: UserDefaults.standard),
             moduleContainersSubject: moduleContainersSubject
         )
     }
 
-    private func setupMainWindowController() {
-        mainWindowController = .init(
-            dockListController: DockListControllerImpl(
-                customizeDockIconModulesModifier: customizeDockIconModulesManager
-            ),
-            moduleContainersSubject: moduleContainersSubject
-        )
+    private func showMainWindowControllerAndSetupIfNeeded() {
+        if mainWindowController == nil {
+            mainWindowController = .init(
+                dockListController: DockListControllerImpl(
+                    customizeDockIconModulesModifier: customizeDockIconModulesManager
+                ),
+                moduleContainersSubject: moduleContainersSubject
+            )
+            mainWindowController?.delegate = self
+        }
         mainWindowController?.showWindowAtCenter(nil)
         NSApp.activate(ignoringOtherApps: true)
+
     }
 
     private func setupObservingUserDefaults() {
@@ -108,5 +115,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self?.statusItem.isVisible = false
             }
         }
+    }
+}
+
+extension AppDelegate: MainWindowControllerDelegate {
+    func becomeUselessWindow() {
+        mainWindowController = nil
     }
 }

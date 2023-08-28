@@ -2,8 +2,13 @@ import Cocoa
 import SwiftUI
 import Combine
 
-class MainWindowController: NSWindowController {
+protocol MainWindowControllerDelegate: AnyObject {
+    func becomeUselessWindow()
+}
+
+class MainWindowController: NSWindowController, NSWindowDelegate {
     private let viewController: NSHostingController<MainView>
+    weak var delegate: MainWindowControllerDelegate!
 
     init(
         dockListController: DockListController,
@@ -17,6 +22,7 @@ class MainWindowController: NSWindowController {
         )
         let window = MainWindow(viewController: viewController)
         super.init(window: window)
+        window.delegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -29,6 +35,11 @@ class MainWindowController: NSWindowController {
 
     override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
+    }
+
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        delegate.becomeUselessWindow()
+        return true
     }
 
     func showWindowAtCenter(_ sender: Any?) {

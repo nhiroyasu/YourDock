@@ -14,21 +14,24 @@ class CustomizeDockIconModulesManager: CustomizeDockIconModulesModifier {
         }
     }
     private let gifDataRepository: GifDataRepository
-    private var userDefaults: UserDefaults
+    private let dockTileInfoRepository: DockTileInfoRepository
     private let moduleContainersSubject: CurrentValueSubject<[CustomizeDockIconModuleContainer], Never>
 
     init(
         gifDataRepository: GifDataRepository,
+        dockTileInfoRepository: DockTileInfoRepository,
         moduleContainersSubject: CurrentValueSubject<[CustomizeDockIconModuleContainer], Never>
     ) {
         self.preservedModuleContainers = []
         self.gifDataRepository = gifDataRepository
-        self.userDefaults = UserDefaults.standard
+        self.dockTileInfoRepository = dockTileInfoRepository
         self.moduleContainersSubject = moduleContainersSubject
     }
 
     func startAndRestoreLatestDocks() {
-        let savedDockTileInfos = userDefaults.dockTileInfoArray.compactMap(convertToState(from:))
+        let savedDockTileInfos = dockTileInfoRepository
+            .fetch()
+            .compactMap(convertToState(from:))
         if savedDockTileInfos.isEmpty {
             addNewCustomizeDockIconModule()
             do {
@@ -42,8 +45,8 @@ class CustomizeDockIconModulesManager: CustomizeDockIconModulesModifier {
     }
 
     func storeDocks() {
-        let savedDockTileInfoArray: [SavedDockTileInfo] = preservedModuleContainers.compactMap(generateInfo(from:))
-        userDefaults.dockTileInfoArray = savedDockTileInfoArray
+        let savedDockTileInfoList: [SavedDockTileInfo] = preservedModuleContainers.compactMap(generateInfo(from:))
+        dockTileInfoRepository.save(savedDockTileInfoList: savedDockTileInfoList)
     }
 
     func addNewCustomizeDockIconModule() {
@@ -83,6 +86,7 @@ class CustomizeDockIconModulesManager: CustomizeDockIconModulesModifier {
             try gifDataRepository.remove(name: info.uuid.uuidString)
             return CustomizeDockIconState(
                 gifData: data,
+                name: info.name,
                 gifAnimation: true,
                 backgroundColor: NSColor(red: info.backgroundColorRed, green: info.backgroundColorGreen, blue: info.backgroundColorBlue, alpha: info.backgroundColorAlpha)
             )
@@ -100,6 +104,7 @@ class CustomizeDockIconModulesManager: CustomizeDockIconModulesModifier {
                 let url = try gifDataRepository.write(name: uuid.uuidString, gifData: data)
                 return .init(
                     uuid: uuid,
+                    name: state.name,
                     backgroundColor: state.backgroundColor,
                     savedImageFilePath: url
                 )

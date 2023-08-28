@@ -63,6 +63,7 @@ class CustomizeDockIconViewController: NSViewController {
                 let gifData = try Data(contentsOf: url)
                 let gifLoopData = try GifLoopConverter().convertLoopGif(gifData: gifData)
                 stateModifier.setGifDataAndAnimate(gifLoopData)
+                stateModifier.setName(fileName(at: url))
             } catch {
                 stateModifier.removeGifData()
                 warn(error)

@@ -5,6 +5,7 @@ import Combine
 struct DockTileItem: Identifiable {
     // NOTE: id is equal to dock module id
     let id: UUID
+    let name: String
     let gifData: Data?
     let backgroundColor: NSColor
 }
@@ -33,7 +34,7 @@ struct DockListView: View {
                                 image: nsImage(gifData: item.gifData),
                                 backgroundColor: item.backgroundColor
                             )
-                            Text(item.id.uuidString)
+                            Text(item.name)
                                 .foregroundStyle(AppColor.contentMain)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             Button {
