@@ -47,6 +47,8 @@
 		4FD126912A9CD4CF00B931EF /* DockTileInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126902A9CD4CF00B931EF /* DockTileInfoRepository.swift */; };
 		4FD126932A9CDCF800B931EF /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126922A9CDCF800B931EF /* FileUtil.swift */; };
 		4FD126952A9D806F00B931EF /* dock-animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4FD126942A9D806F00B931EF /* dock-animation.gif */; };
+		4FD126972A9D873800B931EF /* github-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FD126962A9D873800B931EF /* github-icon.png */; };
+		4FD126992A9D887000B931EF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD126982A9D887000B931EF /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +94,8 @@
 		4FD126902A9CD4CF00B931EF /* DockTileInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockTileInfoRepository.swift; sourceTree = "<group>"; };
 		4FD126922A9CDCF800B931EF /* FileUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
 		4FD126942A9D806F00B931EF /* dock-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "dock-animation.gif"; sourceTree = "<group>"; };
+		4FD126962A9D873800B931EF /* github-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "github-icon.png"; sourceTree = "<group>"; };
+		4FD126982A9D887000B931EF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,7 @@
 		4FC403442A9ADDD20061F9F0 /* BundleAssets */ = {
 			isa = PBXGroup;
 			children = (
+				4FD126962A9D873800B931EF /* github-icon.png */,
 				4FD126942A9D806F00B931EF /* dock-animation.gif */,
 			);
 			path = BundleAssets;
@@ -179,6 +184,7 @@
 				4FD126842A9C3E8A00B931EF /* NSColor+.swift */,
 				4FD1268A2A9C890B00B931EF /* AntialiasedImageView.swift */,
 				4FD126922A9CDCF800B931EF /* FileUtil.swift */,
+				4FD126982A9D887000B931EF /* Constants.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -324,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FD126952A9D806F00B931EF /* dock-animation.gif in Resources */,
+				4FD126972A9D873800B931EF /* github-icon.png in Resources */,
 				4FC402DA2A99B9040061F9F0 /* Main.storyboard in Resources */,
 				4FC4030C2A99E39E0061F9F0 /* CustomizeDockIconViewController.xib in Resources */,
 				4F81F44F2A9998AA00700E7D /* Assets.xcassets in Resources */,
@@ -397,6 +404,7 @@
 				4FC403512A9AFBA50061F9F0 /* LogPrint.swift in Sources */,
 				4FD126892A9C528E00B931EF /* DockIconContentRepresentableView.swift in Sources */,
 				4FC403492A9AE0470061F9F0 /* CustomizeDockIconState.swift in Sources */,
+				4FD126992A9D887000B931EF /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
