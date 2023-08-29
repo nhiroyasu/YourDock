@@ -92,7 +92,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             )
             mainWindowController?.delegate = self
         }
-        mainWindowController?.showWindowAtCenter(nil)
+        mainWindowController?.showWindow(nil)
         NSApp.activate(ignoringOtherApps: true)
 
     }

@@ -41,11 +41,4 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
         delegate.becomeUselessWindow()
         return true
     }
-
-    func showWindowAtCenter(_ sender: Any?) {
-        showWindow(sender)
-        let screenSize = NSScreen.main?.frame.size ?? .init(width: 500, height: 500)
-        let windowSize = window?.frame.size ?? .init(width: 500, height: 500)
-        window?.setFrameOrigin(NSPoint(x: screenSize.width / 2.0 - windowSize.width / 2.0, y: screenSize.height / 2.0 - windowSize.height / 2.0))
-    }
 }
