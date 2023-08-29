@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="1" x2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#29989d"/>
+      <stop offset="0" stop-color="#094aa3"/>
+      <stop offset="1" stop-color="#12bccb"/>
+    </linearGradient>
+    <clipPath id="clip-icon256_v2_fill">
+      <rect width="256" height="256"/>
+    </clipPath>
+  </defs>
+  <g id="icon256_v2_fill" data-name="icon256 v2 fill" clip-path="url(#clip-icon256_v2_fill)">
+    <g id="グループ_9" data-name="グループ 9" transform="translate(-26 -26)">
+      <rect id="長方形_5" data-name="長方形 5" width="256" height="256" rx="52" transform="translate(26 26)" fill="url(#linear-gradient)"/>
+      <g id="グループ_8" data-name="グループ 8" transform="translate(47.148 62.051)">
+        <g id="グループ_7" data-name="グループ 7" transform="translate(0 120.888)">
+          <rect id="長方形_6" data-name="長方形 6" width="215" height="63" rx="12" transform="translate(-0.148 0.061)" fill="rgba(255,255,255,0.31)"/>
+          <g id="グループ_6" data-name="グループ 6" transform="translate(34.504 12.244)">
+            <rect id="長方形_7" data-name="長方形 7" width="40" height="40" rx="8" transform="translate(0.348 -0.183)" fill="#fff"/>
+            <rect id="長方形_7-2" data-name="長方形 7" width="40" height="40" rx="8" transform="translate(52.348 -0.183)" fill="#fff"/>
+            <rect id="長方形_7-3" data-name="長方形 7" width="40" height="40" rx="8" transform="translate(104.348 -0.183)" fill="#fff"/>
+          </g>
+        </g>
+        <path id="合体_2" data-name="合体 2" d="M38.6,92.476a4.985,4.985,0,0,1-3.615-1.463L1.23,57.263a5,5,0,0,1,0-7.071l7.127-7.127a5,5,0,0,1,7.07,0l12.5,12.5V5a5,5,0,0,1,5-5H43.007a5,5,0,0,1,5,5V56.822L61.761,43.068a5,5,0,0,1,7.07,0l7.127,7.126a5,5,0,0,1,0,7.071L42.211,91.013a4.986,4.986,0,0,1-3.536,1.464Z" transform="translate(68.258 0)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

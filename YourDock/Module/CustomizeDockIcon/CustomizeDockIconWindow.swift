@@ -12,7 +12,11 @@ class CustomizeDockIconWindow: NSWindow {
             defer: true
         )
         canHide = false
+        #if DEBUG
+        title = "[DEBUG] Your Dock"
+        #else
         title = "Your Dock"
+        #endif
         contentViewController = viewController
         dockTile.showsApplicationBadge = false
     }

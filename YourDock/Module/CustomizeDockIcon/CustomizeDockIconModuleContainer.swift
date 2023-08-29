@@ -15,6 +15,7 @@ class CustomizeDockIconModuleContainer {
     init(
         uuid: UUID = UUID(),
         initialState: CustomizeDockIconState,
+        stateSubscriber: AnySubscriber<CustomizeDockIconState, Never>,
         becomeUselessHandler: @escaping (_ containerUuid: UUID) -> Void
     ) {
         self.uuid = uuid
@@ -39,6 +40,7 @@ class CustomizeDockIconModuleContainer {
         stateSubject.receive(subscriber: windowController)
         stateSubject.receive(subscriber: viewController)
         stateSubject.receive(subscriber: self)
+        stateSubject.receive(subscriber: stateSubscriber)
     }
 
     deinit {
@@ -51,6 +53,10 @@ class CustomizeDockIconModuleContainer {
 
     func showMiniaturizedWindow() {
         window.miniaturize(self)
+    }
+
+    func closeWindow() {
+        window.performClose(self)
     }
 }
 

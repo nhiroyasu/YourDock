@@ -3,6 +3,7 @@ import Combine
 
 protocol CustomizeDockIconStateModifier {
     func setGifDataAndAnimate(_ data: Data)
+    func setName(_ name: String)
     func removeGifData()
     func startAnimation()
     func pauseAnimation()
@@ -24,6 +25,11 @@ class CustomizeDockIconStore: CustomizeDockIconStateModifier {
     func setGifDataAndAnimate(_ data: Data) {
         state.gifData = data
         state.gifAnimation = true
+        subject.send(state)
+    }
+
+    func setName(_ name: String) {
+        state.name = name
         subject.send(state)
     }
 

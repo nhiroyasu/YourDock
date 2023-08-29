@@ -1,40 +1,47 @@
 import AppKit
 
-struct SavedDockTileInfo: Codable {
-    let uuid: UUID
-    let backgroundColorRed: Double
-    let backgroundColorGreen: Double
-    let backgroundColorBlue: Double
-    let backgroundColorAlpha: Double
-    let savedImageFilePath: URL
-
-    init(
-        uuid: UUID,
-        backgroundColor: NSColor,
-        savedImageFilePath: URL
-    ) {
-        self.uuid = uuid
-        self.savedImageFilePath = savedImageFilePath
-        if let cgColor = backgroundColor.cgColor.converted(to: CGColorSpace(name: CGColorSpace.sRGB)!, intent: CGColorRenderingIntent.defaultIntent, options: nil) {
-            self.backgroundColorRed = Double(cgColor.components?[0] ?? 0)
-            self.backgroundColorGreen = Double(cgColor.components?[1] ?? 0)
-            self.backgroundColorBlue = Double(cgColor.components?[2] ?? 0)
-            self.backgroundColorAlpha = Double(cgColor.components?[3] ?? 0)
-        } else {
-            self.backgroundColorRed = 0.0
-            self.backgroundColorGreen = 0.0
-            self.backgroundColorBlue = 0.0
-            self.backgroundColorAlpha = 0.0
-        }
-    }
-}
-
 extension UserDefaults {
-    var dockTileInfoArray: [SavedDockTileInfo] {
+    enum Keys: String {
+        case dockTileInfoArray
+        case savedDockTileInfoList
+        case showingAppDock
+        case showingIconOnMenubar
+        case isFinishedMigrate_v1_0_0_to_v1_1_0
+    }
+
+    // NOTE: This property is only used in v1.0.0
+    @available(*, deprecated, message: "Use savedDockTileInfoList")
+    var dockTileInfoArray: [SavedDockTileInfo_V1_0_0] {
         get {
             let jsonDecoder = JSONDecoder()
             do {
-                let str = self.string(forKey: "dockTileInfoArray")
+                let str = self.string(forKey: Keys.dockTileInfoArray.rawValue)
+                if let str, let data = str.data(using: .utf8) {
+                    let returnValue = try jsonDecoder.decode([SavedDockTileInfo_V1_0_0].self, from: data)
+                    return returnValue
+                } else {
+                    return []
+                }
+            } catch {
+                return []
+            }
+        }
+        set {
+            let jsonEncoder = JSONEncoder()
+            do {
+                let data = try jsonEncoder.encode(newValue)
+                self.setValue(String(data: data, encoding: .utf8), forKey: Keys.dockTileInfoArray.rawValue)
+            } catch {
+                err(error.localizedDescription)
+            }
+        }
+    }
+
+    var savedDockTileInfoList: [SavedDockTileInfo] {
+        get {
+            let jsonDecoder = JSONDecoder()
+            do {
+                let str = self.string(forKey: Keys.savedDockTileInfoList.rawValue)
                 if let str, let data = str.data(using: .utf8) {
                     let returnValue = try jsonDecoder.decode([SavedDockTileInfo].self, from: data)
                     return returnValue
@@ -49,10 +56,29 @@ extension UserDefaults {
             let jsonEncoder = JSONEncoder()
             do {
                 let data = try jsonEncoder.encode(newValue)
-                self.setValue(String(data: data, encoding: .utf8), forKey: "dockTileInfoArray")
+                self.setValue(String(data: data, encoding: .utf8), forKey: Keys.savedDockTileInfoList.rawValue)
             } catch {
-                print(error.localizedDescription)
+                err(error.localizedDescription)
             }
+        }
+    }
+
+    // NOTE: read only.
+    @objc dynamic var showingAppDock: Bool {
+        bool(forKey: Keys.showingAppDock.rawValue)
+    }
+
+    // NOTE: read only.
+    @objc dynamic var showingIconOnMenubar: Bool {
+        bool(forKey: Keys.showingIconOnMenubar.rawValue)
+    }
+
+    var isFinishedMigrate_v1_0_0_to_v1_1_0: Bool {
+        get {
+            bool(forKey: Keys.isFinishedMigrate_v1_0_0_to_v1_1_0.rawValue)
+        }
+        set {
+            setValue(newValue, forKey: Keys.isFinishedMigrate_v1_0_0_to_v1_1_0.rawValue)
         }
     }
 }
