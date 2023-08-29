@@ -1,4 +1,5 @@
 # YourDock!
+<img src="./images/Your Dock!.gif" width=128 />
 Customize dock icons to your preference
 
 ## Feature
