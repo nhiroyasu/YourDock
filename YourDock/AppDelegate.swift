@@ -114,12 +114,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func setupObservingUserDefaults() {
-        showingAppDockObserver = UserDefaults.standard.observe(\.showingAppDock, options: [.initial, .new]) { _, value in
+        showingAppDockObserver = UserDefaults.standard.observe(\.showingAppDock, options: [.initial, .old, .new]) { _, value in
             if value.newValue ?? true {
                 NSApp.setActivationPolicy(.regular)
             } else {
                 NSApp.setActivationPolicy(.accessory)
                 NSApp.activate(ignoringOtherApps: true)
+                if value.oldValue == true && value.newValue == false {
+                    let nsAlert = NSAlert()
+                    nsAlert.alertStyle = .informational
+                    nsAlert.messageText = "Please restart the app"
+                    nsAlert.runModal()
+                }
             }
         }
         showingIconOnMenubarObserver = UserDefaults.standard.observe(\.showingIconOnMenubar, options: [.initial, .new]) { [weak self] _, value in
