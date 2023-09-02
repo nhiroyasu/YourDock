@@ -12,12 +12,12 @@ class MainWindowController: NSWindowController, NSWindowDelegate {
 
     init(
         dockListController: DockListController,
-        moduleContainersSubject: CurrentValueSubject<[CustomizeDockIconModuleContainer], Never>
+        dockIconsSubject: CurrentValueSubject<[DockIcon], Never>
     ) {
         self.viewController = NSHostingController<MainView>(
             rootView: MainView(
                 dockListController: dockListController,
-                moduleContainersSubject: moduleContainersSubject
+                dockIconsSubject: dockIconsSubject
             )
         )
         let window = MainWindow(viewController: viewController)

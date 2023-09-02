@@ -6,21 +6,21 @@ class CustomizeDockIconModuleContainer {
     private let windowController: CustomizeDockIconWindowController
     private let window: CustomizeDockIconWindow
     private let viewController: CustomizeDockIconViewController
-    private let stateSubject: PassthroughSubject<CustomizeDockIconState, Never>
+    private let stateSubject: PassthroughSubject<GIFDockIconState, Never>
     private let stateModifier: CustomizeDockIconStateModifier
     private let becomeUselessHandler: (_ containerUuid: UUID) -> Void
 
-    private(set) var preservedState: CustomizeDockIconState
+    private(set) var preservedState: GIFDockIconState
 
     init(
-        uuid: UUID = UUID(),
-        initialState: CustomizeDockIconState,
-        stateSubscriber: AnySubscriber<CustomizeDockIconState, Never>,
+        uuid: UUID,
+        initialState: GIFDockIconState,
+        stateSubject: PassthroughSubject<GIFDockIconState, Never>,
         becomeUselessHandler: @escaping (_ containerUuid: UUID) -> Void
     ) {
         self.uuid = uuid
         self.preservedState = initialState
-        self.stateSubject = PassthroughSubject()
+        self.stateSubject = stateSubject
         self.stateModifier = CustomizeDockIconStore(
             state: initialState,
             subject: stateSubject
@@ -40,7 +40,6 @@ class CustomizeDockIconModuleContainer {
         stateSubject.receive(subscriber: windowController)
         stateSubject.receive(subscriber: viewController)
         stateSubject.receive(subscriber: self)
-        stateSubject.receive(subscriber: stateSubscriber)
     }
 
     deinit {
@@ -61,14 +60,14 @@ class CustomizeDockIconModuleContainer {
 }
 
 extension CustomizeDockIconModuleContainer: Subscriber {
-    typealias Input = CustomizeDockIconState
+    typealias Input = GIFDockIconState
     typealias Failure = Never
 
     func receive(subscription: Subscription) {
         subscription.request(.unlimited)
     }
 
-    func receive(_ input: CustomizeDockIconState) -> Subscribers.Demand {
+    func receive(_ input: GIFDockIconState) -> Subscribers.Demand {
         self.preservedState = input
         return .none
     }

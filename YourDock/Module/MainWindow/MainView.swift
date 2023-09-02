@@ -10,7 +10,20 @@ struct MainView: View {
     @State private var sideMenuSelectionItem: SplitContentItem? = .dockList
     @State private var splitContentPath: [SplitContentItem] = [.dockList]
     let dockListController: DockListController
-    let moduleContainersSubject: CurrentValueSubject<[CustomizeDockIconModuleContainer], Never>
+    let dockIconsSubject: CurrentValueSubject<[DockIcon], Never>
+    private var dockListPublisher: AnyPublisher<[DockTileItem], Never> {
+        dockIconsSubject
+            .map { (dockIcons: [DockIcon]) -> [DockTileItem] in
+                dockIcons.map { dockIcon in
+                    DockTileItem(
+                        id: dockIcon.id,
+                        name: dockIcon.name,
+                        config: dockIcon.config
+                    )
+                }
+            }
+            .eraseToAnyPublisher()
+    }
 
     var body: some View {
         NavigationSplitView {
@@ -26,19 +39,9 @@ struct MainView: View {
         } detail: {
             switch sideMenuSelectionItem {
             case .dockList:
-                let dockListPublisher = moduleContainersSubject.map { (containers: [CustomizeDockIconModuleContainer]) -> [DockTileItem] in
-                    containers.map {
-                        .init(
-                            id: $0.uuid,
-                            name: $0.preservedState.name,
-                            gifData: $0.preservedState.gifData,
-                            backgroundColor: $0.preservedState.backgroundColor
-                        )
-                    }
-                }
                 DockListView(
                     controller: dockListController,
-                    dockListPublisher: dockListPublisher.eraseToAnyPublisher()
+                    dockListPublisher: dockListPublisher
                 )
             case .setting:
                 SettingView()

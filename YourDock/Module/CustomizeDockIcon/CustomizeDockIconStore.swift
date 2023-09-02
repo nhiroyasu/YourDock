@@ -11,12 +11,12 @@ protocol CustomizeDockIconStateModifier {
 }
 
 class CustomizeDockIconStore: CustomizeDockIconStateModifier {
-    private var state: CustomizeDockIconState
-    private let subject: PassthroughSubject<CustomizeDockIconState, Never>
+    private var state: GIFDockIconState
+    private let subject: PassthroughSubject<GIFDockIconState, Never>
 
     init(
-        state: CustomizeDockIconState,
-        subject: PassthroughSubject<CustomizeDockIconState, Never>
+        state: GIFDockIconState,
+        subject: PassthroughSubject<GIFDockIconState, Never>
     ) {
         self.state = state
         self.subject = subject
@@ -34,7 +34,7 @@ class CustomizeDockIconStore: CustomizeDockIconStateModifier {
     }
 
     func removeGifData() {
-        state.gifData = nil
+        state.gifData = defaultGIFImageData()
         subject.send(state)
     }
 

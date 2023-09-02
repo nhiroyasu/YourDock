@@ -7,7 +7,7 @@ protocol CustomizeDockIconWindowControllerDelegate: AnyObject {
 
 class CustomizeDockIconWindowController: NSWindowController, NSWindowDelegate {
     private let stateModifier: CustomizeDockIconStateModifier
-    private var preservedState: CustomizeDockIconState
+    private var preservedState: GIFDockIconState
 
     private let dockTileAnimationQueue = DispatchQueue.main
     private var dockTileAnimationQueueCancellation: Cancellable?
@@ -17,7 +17,7 @@ class CustomizeDockIconWindowController: NSWindowController, NSWindowDelegate {
     init(
         window: NSWindow,
         stateModifier: CustomizeDockIconStateModifier,
-        initialState: CustomizeDockIconState
+        initialState: GIFDockIconState
     ) {
         self.stateModifier = stateModifier
         self.preservedState = initialState
@@ -61,10 +61,9 @@ class CustomizeDockIconWindowController: NSWindowController, NSWindowDelegate {
         return true
     }
 
-    private func generateDockTileContentView(state: CustomizeDockIconState) -> NSView? {
+    private func generateDockTileContentView(state: GIFDockIconState) -> NSView? {
         guard let window,
-              let gifData = state.gifData,
-              let image = NSImage(data: gifData) else {
+              let image = NSImage(data: state.gifData) else {
             return nil
         }
         let dockTileContentView = DockIconContentView(
@@ -77,14 +76,14 @@ class CustomizeDockIconWindowController: NSWindowController, NSWindowDelegate {
 }
 
 extension CustomizeDockIconWindowController: Subscriber {
-    typealias Input = CustomizeDockIconState
+    typealias Input = GIFDockIconState
     typealias Failure = Never
 
     func receive(subscription: Subscription) {
         subscription.request(.unlimited)
     }
 
-    func receive(_ input: CustomizeDockIconState) -> Subscribers.Demand {
+    func receive(_ input: GIFDockIconState) -> Subscribers.Demand {
         self.preservedState = input
         return .none
     }

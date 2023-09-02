@@ -22,7 +22,7 @@ class DockListControllerImpl: DockListController {
     }
 
     func didTapAddButton() {
-        customizeDockIconModulesModifier.addNewCustomizeDockIconModule()
+        customizeDockIconModulesModifier.addNewGIFDockIconModule()
     }
 
 
