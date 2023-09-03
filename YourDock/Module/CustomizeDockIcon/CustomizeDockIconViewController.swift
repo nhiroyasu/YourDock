@@ -8,11 +8,11 @@ class CustomizeDockIconViewController: NSViewController {
     private var colorObservation: NSKeyValueObservation?
     private let picker = NSColorPanel.shared
     private let stateModifier: CustomizeDockIconStateModifier
-    private var preservedState: CustomizeDockIconState
+    private var preservedState: GIFDockIconState
 
     init(
         stateModifier: CustomizeDockIconStateModifier,
-        initialState: CustomizeDockIconState
+        initialState: GIFDockIconState
     ) {
         self.stateModifier = stateModifier
         self.preservedState = initialState
@@ -34,8 +34,7 @@ class CustomizeDockIconViewController: NSViewController {
         dockIconPreviewView.layer?.backgroundColor = NSColor(red: 0xE0/0xFF, green: 0xE0/0xFF, blue: 0xE0/0xFF, alpha: 1.0).cgColor
         dockIconPreviewView.layer?.borderColor = NSColor(red: 0x77/0xFF, green: 0x77/0xFF, blue: 0x77/0xFF, alpha: 1.0).cgColor
         dockIconPreviewView.layer?.borderWidth = 1
-        if let data = preservedState.gifData,
-           let image = NSImage(data: data) {
+        if let image = NSImage(data: preservedState.gifData) {
             dockIconView = .init(
                 frame: .init(origin: .zero, size: dockIconPreviewView.bounds.size),
                 image: image,
@@ -101,22 +100,18 @@ class CustomizeDockIconViewController: NSViewController {
 }
 
 extension CustomizeDockIconViewController: Subscriber {
-    typealias Input = CustomizeDockIconState
+    typealias Input = GIFDockIconState
     typealias Failure = Never
 
     func receive(subscription: Subscription) {
         subscription.request(.unlimited)
     }
 
-    func receive(_ input: CustomizeDockIconState) -> Subscribers.Demand {
+    func receive(_ input: GIFDockIconState) -> Subscribers.Demand {
         self.preservedState = input
 
         // render view based to state.
-        if let data = input.gifData {
-            dockIconView?.setGif(image: NSImage(data: data))
-        } else {
-            dockIconView?.setGif(image: nil)
-        }
+        dockIconView?.setGif(image: NSImage(data: input.gifData))
         dockIconView?.setAnimates(input.gifAnimation)
         dockIconView?.setBackgroundColor(color: input.backgroundColor)
 

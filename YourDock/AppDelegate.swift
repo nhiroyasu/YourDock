@@ -7,15 +7,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     private var customizeDockIconModulesManager: CustomizeDockIconModulesManager!
     private var mainWindowController: MainWindowController?
-    private let moduleContainersSubject: CurrentValueSubject<[CustomizeDockIconModuleContainer], Never> = .init([])
     private var showingAppDockObserver: NSKeyValueObservation?
     private var showingIconOnMenubarObserver: NSKeyValueObservation?
+    private let migrationUseCase: MigrationUseCase = MigrationInteractor(
+        dockIconRepository: DockIconRepositoryImpl(userDefaults: UserDefaults.standard),
+        gifDataRepository: GifDataRepositoryImpl(),
+        userDefaults: UserDefaults.standard
+    )
+    private let combinedSubjectContainer: CombinedDockIconsSubjectContainer = .init()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // setup
+        migrationUseCase.migrate()
+        combinedSubjectContainer.combine()
         setupCustomizeDockIconModulesManager()
+        setupObservingUserDefaults()
+
+        // show windows
         showMainWindowControllerAndSetupIfNeeded()
         customizeDockIconModulesManager.startAndRestoreLatestDocks()
-        setupObservingUserDefaults()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -37,7 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func didTapAddDockMenuItem() {
-        customizeDockIconModulesManager.addNewCustomizeDockIconModule()
+        customizeDockIconModulesManager.addNewGIFDockIconModule()
     }
 
     @objc func didTapOpenToolWindowMenuItem() {
@@ -75,20 +85,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func setupCustomizeDockIconModulesManager() {
-        customizeDockIconModulesManager = .init(
-            gifDataRepository: GifDataRepositoryImpl(),
-            dockTileInfoRepository: DockTileInfoRepositoryImpl(userDefaults: UserDefaults.standard),
-            moduleContainersSubject: moduleContainersSubject
+        let gifDataRepository = GifDataRepositoryImpl()
+        customizeDockIconModulesManager = CustomizeDockIconModulesManager(
+            gifDataRepository: gifDataRepository,
+            dockIconUseCase: DockIconInteractor(
+                dockIconRepository: DockIconRepositoryImpl(userDefaults: UserDefaults.standard),
+                gifDataRepository: gifDataRepository
+            ),
+            dockIconsSubject: combinedSubjectContainer.storedDockIconsSubject,
+            appendingDockIconSubject: combinedSubjectContainer.appendingDockIconSubject,
+            removingDockIconSubject: combinedSubjectContainer.removingDockIconSubject
         )
     }
 
     private func showMainWindowControllerAndSetupIfNeeded() {
         if mainWindowController == nil {
-            mainWindowController = .init(
+            mainWindowController = MainWindowController(
                 dockListController: DockListControllerImpl(
                     customizeDockIconModulesModifier: customizeDockIconModulesManager
                 ),
-                moduleContainersSubject: moduleContainersSubject
+                dockIconsSubject: combinedSubjectContainer.storedDockIconsSubject
             )
             mainWindowController?.delegate = self
         }
@@ -98,12 +114,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func setupObservingUserDefaults() {
-        showingAppDockObserver = UserDefaults.standard.observe(\.showingAppDock, options: [.initial, .new]) { _, value in
+        showingAppDockObserver = UserDefaults.standard.observe(\.showingAppDock, options: [.initial, .old, .new]) { _, value in
             if value.newValue ?? true {
                 NSApp.setActivationPolicy(.regular)
             } else {
                 NSApp.setActivationPolicy(.accessory)
                 NSApp.activate(ignoringOtherApps: true)
+                if value.oldValue == true && value.newValue == false {
+                    let nsAlert = NSAlert()
+                    nsAlert.alertStyle = .informational
+                    nsAlert.messageText = "Please restart the app"
+                    nsAlert.runModal()
+                }
             }
         }
         showingIconOnMenubarObserver = UserDefaults.standard.observe(\.showingIconOnMenubar, options: [.initial, .new]) { [weak self] _, value in

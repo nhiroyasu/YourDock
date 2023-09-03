@@ -6,8 +6,7 @@ struct DockTileItem: Identifiable {
     // NOTE: id is equal to dock module id
     let id: UUID
     let name: String
-    let gifData: Data?
-    let backgroundColor: NSColor
+    let config: DockIconConfig
 }
 
 struct DockListView: View {
@@ -29,11 +28,7 @@ struct DockListView: View {
                         controller.didTapDock(at: item.id)
                     } label: {
                         HStack {
-                            DockIconContentRepresentableView(
-                                frame: .init(origin: .zero, size: .init(width: 64, height: 64)),
-                                image: nsImage(gifData: item.gifData),
-                                backgroundColor: item.backgroundColor
-                            )
+                            DockIconView(config: item.config)
                             Text(item.name)
                                 .foregroundStyle(AppColor.contentMain)
                                 .frame(maxWidth: .infinity, alignment: .leading)

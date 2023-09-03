@@ -2,55 +2,70 @@ import AppKit
 import Combine
 
 protocol CustomizeDockIconModulesModifier {
-    func addNewCustomizeDockIconModule()
+    func addNewGIFDockIconModule()
     func editCustomizeDockIconModule(at uuid: UUID)
     func removeCustomizeDockIconModule(at uuid: UUID)
 }
 
 class CustomizeDockIconModulesManager: CustomizeDockIconModulesModifier {
-    private var preservedModuleContainers: [CustomizeDockIconModuleContainer] {
-        didSet {
-            moduleContainersSubject.send(preservedModuleContainers)
-        }
-    }
+    private var preservedModuleContainers: [CustomizeDockIconModuleContainer] = []
     private let gifDataRepository: GifDataRepository
-    private let dockTileInfoRepository: DockTileInfoRepository
-    private let moduleContainersSubject: CurrentValueSubject<[CustomizeDockIconModuleContainer], Never>
+    private let dockIconUseCase: DockIconUseCase
+    private let dockIconsSubject: CurrentValueSubject<[DockIcon], Never>
+    private let appendingDockIconSubject: PassthroughSubject<DockIcon, Never>
+    private let removingDockIconSubject: PassthroughSubject<DockIcon, Never>
+    private let gifDockIconStateSubscriber: GIFDockIconStateSubscriber
+    private var appendingDockIconCancelation: AnyCancellable?
+    private var removingDockIconCancelation: AnyCancellable?
 
     init(
         gifDataRepository: GifDataRepository,
-        dockTileInfoRepository: DockTileInfoRepository,
-        moduleContainersSubject: CurrentValueSubject<[CustomizeDockIconModuleContainer], Never>
+        dockIconUseCase: DockIconUseCase,
+        dockIconsSubject: CurrentValueSubject<[DockIcon], Never>,
+        appendingDockIconSubject: PassthroughSubject<DockIcon, Never>,
+        removingDockIconSubject: PassthroughSubject<DockIcon, Never>
     ) {
-        self.preservedModuleContainers = []
         self.gifDataRepository = gifDataRepository
-        self.dockTileInfoRepository = dockTileInfoRepository
-        self.moduleContainersSubject = moduleContainersSubject
+        self.dockIconUseCase = dockIconUseCase
+        self.dockIconsSubject = dockIconsSubject
+        self.appendingDockIconSubject = appendingDockIconSubject
+        self.removingDockIconSubject = removingDockIconSubject
+        self.gifDockIconStateSubscriber = GIFDockIconStateSubscriber(dockIconsSubject: dockIconsSubject)
+
+        appendingDockIconCancelation = appendingDockIconSubject.sink(receiveValue: subscribeAppendingDockIcon(dockIcon:))
+        removingDockIconCancelation = removingDockIconSubject.sink(receiveValue: subscribeRemovingDockIcon(dockIcon:))
     }
 
     func startAndRestoreLatestDocks() {
-        let savedDockTileInfos = dockTileInfoRepository
-            .fetch()
-            .compactMap(convertToState(from:))
-        if savedDockTileInfos.isEmpty {
-            addNewCustomizeDockIconModule()
-            do {
-                try gifDataRepository.removeAll()
-            } catch {
-                warn(error)
-            }
+        let dockIcons = dockIconUseCase.fetch()
+        if dockIcons.isEmpty {
+            addNewGIFDockIconModule()
         } else {
-            savedDockTileInfos.forEach(addCustomizeDockIconModule(state:))
+            dockIcons.forEach(appendingDockIconSubject.send(_:))
+        }
+        do {
+            try gifDataRepository.removeAll()
+            info("All of the saved GIF images were deleted.")
+        } catch {
+            warn(error)
         }
     }
 
     func storeDocks() {
-        let savedDockTileInfoList: [SavedDockTileInfo] = preservedModuleContainers.compactMap(generateInfo(from:))
-        dockTileInfoRepository.save(savedDockTileInfoList: savedDockTileInfoList)
+        dockIconUseCase.save(dockIconsSubject.value)
     }
 
-    func addNewCustomizeDockIconModule() {
-        addCustomizeDockIconModule(state: .initializeState)
+    func addNewGIFDockIconModule() {
+        let dockId = UUID()
+        let dockIcon = DockIcon(
+            id: dockId,
+            name: applicationName(),
+            config: .gif(config: GifDockIconConfig(
+                gifData: defaultGIFImageData(),
+                backgroundColor: .clear
+            ))
+        )
+        appendingDockIconSubject.send(dockIcon)
     }
 
     func editCustomizeDockIconModule(at uuid: UUID) {
@@ -68,68 +83,46 @@ class CustomizeDockIconModulesManager: CustomizeDockIconModulesModifier {
 
     // MARK: - only used internal
 
-    private func addCustomizeDockIconModule(state: CustomizeDockIconState) {
+    private func addDockIconModule(from dockIcon: DockIcon) {
+        switch dockIcon.config {
+        case .gif(let config):
+            self.addGIFDockIconModule(
+                dockId: dockIcon.id,
+                state: GIFDockIconState(
+                    dockId: dockIcon.id,
+                    name: dockIcon.name,
+                    gifData: config.gifData,
+                    gifAnimation: true,
+                    backgroundColor: config.backgroundColor
+                )
+            )
+        }
+    }
+
+    private func addGIFDockIconModule(dockId: UUID, state: GIFDockIconState) {
+        let stateSubject = PassthroughSubject<GIFDockIconState, Never>()
+        stateSubject.receive(subscriber: gifDockIconStateSubscriber)
         let container = CustomizeDockIconModuleContainer(
+            uuid: dockId,
             initialState: state,
-            stateSubscriber: AnySubscriber(self),
+            stateSubject: stateSubject,
             becomeUselessHandler: { [weak self] containerUuid in
-                self?.preservedModuleContainers.removeAll(where: { $0.uuid == containerUuid })
+                guard let self,
+                      let targetDockIcon = dockIconsSubject.value.first(where: { $0.id == containerUuid }) else { return }
+                removingDockIconSubject.send(targetDockIcon)
             }
         )
         container.showMiniaturizedWindow()
         preservedModuleContainers.append(container)
     }
-
-    private func convertToState(from info: SavedDockTileInfo) -> CustomizeDockIconState? {
-        do {
-            let data = try gifDataRepository.read(name: info.uuid.uuidString)
-            try gifDataRepository.remove(name: info.uuid.uuidString)
-            return CustomizeDockIconState(
-                gifData: data,
-                name: info.name,
-                gifAnimation: true,
-                backgroundColor: NSColor(red: info.backgroundColorRed, green: info.backgroundColorGreen, blue: info.backgroundColorBlue, alpha: info.backgroundColorAlpha)
-            )
-        } catch {
-            warn(error)
-            return nil
-        }
-    }
-
-    private func generateInfo(from container: CustomizeDockIconModuleContainer) -> SavedDockTileInfo? {
-        let state = container.preservedState
-        let uuid = container.uuid
-        if let data = state.gifData {
-            do {
-                let url = try gifDataRepository.write(name: uuid.uuidString, gifData: data)
-                return .init(
-                    uuid: uuid,
-                    name: state.name,
-                    backgroundColor: state.backgroundColor,
-                    savedImageFilePath: url
-                )
-            } catch {
-                warn(error)
-                return nil
-            }
-        } else {
-            return nil
-        }
-    }
 }
 
-extension CustomizeDockIconModulesManager: Subscriber {
-    typealias Input = CustomizeDockIconState
-    typealias Failure = Never
-
-    func receive(subscription: Subscription) {
-        subscription.request(.unlimited)
+extension CustomizeDockIconModulesManager {
+    func subscribeAppendingDockIcon(dockIcon: DockIcon) {
+        addDockIconModule(from: dockIcon)
     }
 
-    func receive(_ input: CustomizeDockIconState) -> Subscribers.Demand {
-        moduleContainersSubject.send(preservedModuleContainers)
-        return .none
+    func subscribeRemovingDockIcon(dockIcon: DockIcon) {
+        preservedModuleContainers.removeAll(where: { $0.uuid == dockIcon.id })
     }
-
-    func receive(completion: Subscribers.Completion<Never>) {}
 }

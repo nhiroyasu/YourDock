@@ -47,7 +47,7 @@ class GifDataRepositoryImpl: GifDataRepository {
         guard let bundleId = Bundle.main.bundleIdentifier else { throw NotDefinedBundleIdError() }
         var url = try fileManager.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         url.append(path: bundleId, directoryHint: .isDirectory)
-        let contents = try fileManager.contentsOfDirectory(atPath: url.absoluteString)
-        try contents.forEach(fileManager.removeItem(atPath:))
+        let contents = try fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+        try contents.forEach(fileManager.removeItem(at:))
     }
 }
